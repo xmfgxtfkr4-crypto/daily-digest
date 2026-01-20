@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Digest - Your Personalized Morning Paper</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Daily Digest</h1>
+      <p class="subtitle">Your Personalized Morning Paper</p>
+    </header>
+
+    <main>
+      <!-- Input Section -->
+      <section id="input-section" class="card">
+        <h2>Enter Your Zip Code</h2>
+        <form id="zip-form">
+          <div class="form-group">
+            <label for="zip-input">5-Digit Zip Code:</label>
+            <input
+              type="text"
+              id="zip-input"
+              name="zip"
+              pattern="[0-9]{5}"
+              maxlength="5"
+              placeholder="12345"
+              required
+              autocomplete="postal-code"
+            >
+          </div>
+          <button type="submit" id="fetch-btn" class="btn btn-primary">
+            Get My Daily Digest
+          </button>
+        </form>
+        <p id="error-message" class="error" hidden></p>
+      </section>
+
+      <!-- Loading State -->
+      <section id="loading-section" class="card" hidden>
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Preparing your daily digest...</p>
+        </div>
+      </section>
+
+      <!-- Preview Section -->
+      <section id="preview-section" hidden>
+        <!-- Header Preview -->
+        <div class="card preview-header">
+          <h2 id="greeting">Good Morning!</h2>
+          <p id="date-display" class="date"></p>
+          <p id="location-display" class="location"></p>
+        </div>
+
+        <!-- Weather Preview -->
+        <div class="card">
+          <h2>Weather Forecast</h2>
+          <div id="weather-content" class="weather-grid"></div>
+        </div>
+
+        <!-- News Preview -->
+        <div class="card">
+          <h2>Today's Good News</h2>
+          <div id="news-content" class="news-list"></div>
+        </div>
+
+        <!-- Holidays Preview -->
+        <div class="card">
+          <h2>Upcoming Holidays</h2>
+          <div id="holidays-content"></div>
+        </div>
+
+        <!-- Crossword Preview -->
+        <div class="card">
+          <h2>Daily Crossword Puzzle</h2>
+          <div id="crossword-preview">
+            <p>A fun crossword puzzle will be included in your PDF!</p>
+            <p id="crossword-words" class="word-preview"></p>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions">
+          <button id="generate-pdf-btn" class="btn btn-primary btn-large">
+            Generate Printable PDF
+          </button>
+          <button id="start-over-btn" class="btn btn-secondary">
+            Start Over
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made with care for our community</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="crossword.js"></script>
+  <script src="pdf-generator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

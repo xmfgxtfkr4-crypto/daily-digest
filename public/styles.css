@@ -1,0 +1,445 @@
+/* Daily Digest - Warm & Welcoming Styles */
+
+/* Reset and Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-color: #f59e0b;
+  --accent-light: #fef3c7;
+  --text-color: #1f2937;
+  --text-light: #4b5563;
+  --background: linear-gradient(135deg, #fef9e7 0%, #fff7ed 50%, #fef3c7 100%);
+  --white: #ffffff;
+  --border-color: #e5e7eb;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --error-color: #dc2626;
+  --success-color: #16a34a;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.7;
+  color: var(--text-color);
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 2rem 1rem;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  border-top: 5px solid var(--accent-color);
+}
+
+header h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border-left: 4px solid var(--accent-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent-light);
+  color: var(--primary-color);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+#zip-input {
+  width: 100%;
+  max-width: 220px;
+  padding: 1.1rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  text-align: center;
+  letter-spacing: 0.25em;
+  border: 3px solid var(--border-color);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
+
+#zip-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  background: var(--white);
+}
+
+#zip-input::placeholder {
+  color: #9ca3af;
+  letter-spacing: 0.2em;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #7c3aed 100%);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: #f9fafb;
+  border-color: var(--text-light);
+}
+
+.btn-large {
+  padding: 1.25rem 3rem;
+  font-size: 1.3rem;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Message */
+.error {
+  color: var(--error-color);
+  font-size: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fef2f2;
+  border: 2px solid var(--error-color);
+  border-radius: 10px;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 3rem;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid var(--accent-light);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p {
+  font-size: 1.3rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Preview Section */
+.preview-header {
+  text-align: center;
+  border-left: none;
+  border-top: 5px solid var(--accent-color);
+  background: linear-gradient(180deg, var(--white) 0%, #fffbeb 100%);
+}
+
+.preview-header h2 {
+  font-size: 2.2rem;
+  border-bottom: none;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0;
+  background: linear-gradient(135deg, var(--accent-color), #ea580c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.date {
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-color);
+}
+
+.location {
+  font-size: 1.15rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Weather Grid */
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.weather-day {
+  text-align: center;
+  padding: 1.25rem 1rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  transition: transform 0.2s;
+}
+
+.weather-day:hover {
+  transform: scale(1.02);
+}
+
+.weather-day.today {
+  background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.15);
+}
+
+.weather-day .day-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.weather-day .temp {
+  font-size: 1.9rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: var(--text-color);
+}
+
+.weather-day .description {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  text-transform: capitalize;
+}
+
+.weather-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* News List */
+.news-list {
+  list-style: none;
+}
+
+.news-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.news-item p {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.news-source {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+/* Holidays Table */
+.holidays-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.holidays-table th,
+.holidays-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.holidays-table th {
+  font-weight: bold;
+  background: var(--accent-light);
+  color: var(--text-color);
+}
+
+.holidays-table tr:last-child td {
+  border-bottom: none;
+}
+
+.holidays-table tr:hover td {
+  background: #fef9e7;
+}
+
+.no-holidays {
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Crossword Preview */
+#crossword-preview {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+#crossword-preview p {
+  font-size: 1.1rem;
+}
+
+.word-preview {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  .card {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .weather-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Print styles */
+@media print {
+  .btn,
+  #input-section,
+  .actions {
+    display: none !important;
+  }
+}
