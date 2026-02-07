@@ -44,7 +44,8 @@ function generateDigestPdf(data) {
   }
 
   function checkNewPage(needed = 100) {
-    if (y > pageHeight - needed) {
+    const bottomMargin = 50; // reserve space for footer
+    if (y + needed > pageHeight - bottomMargin) {
       doc.addPage();
       y = margin;
       return true;
@@ -168,24 +169,37 @@ function generateDigestPdf(data) {
     y += 30;
 
     data.news.forEach((item, i) => {
-      checkNewPage(80);
+      // Pre-calculate actual height needed for this item
+      doc.setFont('times', 'bold');
+      doc.setFontSize(16);
+      const headlineLines = doc.splitTextToSize(item.title, contentWidth);
+      let itemHeight = headlineLines.length * 20;
+
+      let descLines = [];
+      if (item.description) {
+        doc.setFont('times', 'normal');
+        doc.setFontSize(14);
+        descLines = doc.splitTextToSize(item.description, contentWidth);
+        itemHeight += descLines.length * 18;
+      }
+      itemHeight += 15;
+
+      checkNewPage(itemHeight);
 
       // Headline - LARGE
       doc.setFont('times', 'bold');
       doc.setFontSize(16);
       setColor(darkGray);
-      const headlineLines = doc.splitTextToSize(item.title, contentWidth);
       doc.text(headlineLines, margin, y);
       y += headlineLines.length * 20;
 
-      // Description - MEDIUM
-      if (item.description) {
+      // Description - MEDIUM (full text, no truncation)
+      if (descLines.length > 0) {
         doc.setFont('times', 'normal');
         doc.setFontSize(14);
         setColor(lightGray);
-        const descLines = doc.splitTextToSize(item.description, contentWidth);
-        doc.text(descLines.slice(0, 2), margin, y);
-        y += Math.min(descLines.length, 2) * 18;
+        doc.text(descLines, margin, y);
+        y += descLines.length * 18;
       }
 
       y += 15;
@@ -207,8 +221,8 @@ function generateDigestPdf(data) {
     y += 30;
 
     if (data.holidays && data.holidays.length > 0) {
-      data.holidays.slice(0, 5).forEach(item => {
-        checkNewPage(40);
+      data.holidays.slice(0, 8).forEach(item => {
+        checkNewPage(30);
 
         doc.setFont('times', 'bold');
         doc.setFontSize(15);
@@ -235,8 +249,14 @@ function generateDigestPdf(data) {
     y += 30;
 
     if (data.history && data.history.length > 0) {
-      data.history.slice(0, 3).forEach(item => {
-        checkNewPage(60);
+      data.history.forEach(item => {
+        // Pre-calculate actual height needed
+        doc.setFont('times', 'normal');
+        doc.setFontSize(14);
+        const eventLines = doc.splitTextToSize(item.event, contentWidth - 50);
+        const itemHeight = eventLines.length * 18 + 12;
+
+        checkNewPage(itemHeight);
 
         // Year - bold accent color
         doc.setFont('times', 'bold');
@@ -248,7 +268,6 @@ function generateDigestPdf(data) {
         doc.setFont('times', 'normal');
         doc.setFontSize(14);
         setColor(darkGray);
-        const eventLines = doc.splitTextToSize(item.event, contentWidth - 50);
         doc.text(eventLines, margin + 50, y);
         y += eventLines.length * 18 + 12;
       });
@@ -364,7 +383,7 @@ function generateDigestPdf(data) {
   }
 
   function addUpsideDownAnswers(crossword) {
-    const answerY = pageHeight - 25;
+    const answerY = pageHeight - 45;
 
     // Separator line
     setDrawColor([180, 180, 180]);
