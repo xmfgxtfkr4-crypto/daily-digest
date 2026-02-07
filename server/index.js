@@ -31,6 +31,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Daily Digest server running at http://localhost:${PORT}`);
-});
+// Only start listening when running locally (not on Vercel)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Daily Digest server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

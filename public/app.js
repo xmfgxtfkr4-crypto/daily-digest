@@ -109,6 +109,9 @@ function renderPreview(data) {
   // Render holidays
   renderHolidays(data.holidays);
 
+  // Render history
+  renderHistory(data.history);
+
   // Show crossword words preview
   const wordsPreview = document.getElementById('crossword-words');
   wordsPreview.textContent = `Words included: ${data.crosswordWords.slice(0, 8).join(', ')}...`;
@@ -228,6 +231,26 @@ function formatHolidayDate(dateStr) {
     weekday: 'long',
     month: 'long',
     day: 'numeric'
+  });
+}
+
+// Render history section
+function renderHistory(history) {
+  const container = document.getElementById('history-content');
+  container.innerHTML = '';
+
+  if (!history || history.length === 0) {
+    container.innerHTML = '<p class="no-history">No history available.</p>';
+    return;
+  }
+
+  history.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'history-item';
+    div.innerHTML = `
+      <strong>${escapeHtml(item.year)}:</strong> ${escapeHtml(item.event)}
+    `;
+    container.appendChild(div);
   });
 }
 
